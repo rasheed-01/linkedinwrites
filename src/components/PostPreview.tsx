@@ -28,7 +28,7 @@ const PostPreview: React.FC<PostPreviewProps> = ({ content }) => {
             MW
           </div>
           <div>
-            <h4 className="font-bold text-gray-800">Manaal Waheed Khan</h4>
+            <h4 className="font-bold text-gray-800">Manaal Khan</h4>
             <p className="text-primary-500 text-sm">Smartest Woman on The Planet</p>
             <p className="text-gray-400 text-xs">1d • Edited • 🌎</p>
           </div>
