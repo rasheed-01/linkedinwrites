@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "linkedinwriter"
-  }
+    "default": "linkedinwriter",
+    "dev": "linkedinwriter"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

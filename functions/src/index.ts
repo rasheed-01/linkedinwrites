@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import { Configuration, OpenAIApi } from 'openai';
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: functions.config().openai.key, // ✅ fixed: use Firebase env config
 });
 const openai = new OpenAIApi(configuration);
 
@@ -24,7 +24,8 @@ export const enhancePost = functions.https.onCall(async (data, context) => {
       messages: [
         {
           role: "system",
-          content: "You are an expert at writing viral LinkedIn posts. Format the text with appropriate line breaks, emojis, and emphasis to maximize engagement.",
+          content:
+            "You are an expert at writing viral LinkedIn posts. Format the text with appropriate line breaks, emojis, and emphasis to maximize engagement.",
         },
         {
           role: "user",
@@ -37,10 +38,11 @@ export const enhancePost = functions.https.onCall(async (data, context) => {
 
     return { enhancedContent };
   } catch (error: any) {
+    console.error("OpenAI error:", error?.response?.data || error.message || error);
     throw new functions.https.HttpsError(
       'internal',
       'Failed to enhance post',
-      error
+      error?.message || 'Unknown error'
     );
   }
 });
