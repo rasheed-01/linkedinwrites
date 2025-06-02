@@ -17,7 +17,19 @@ export const enhancePost = functions.https.onCall(async (data, context) => {
   }
 
   try {
-    const prompt = `Rewrite the following content in the style of a viral LinkedIn post using the "${style}" format. Make it engaging and professional while maintaining the core message:\n\n${content}`;
+    const prompt = `
+Act as a viral LinkedIn post writer.
+
+Transform the following raw content into a professional, high-engagement LinkedIn post. 
+- Use the "${style}" style.
+- Optimize for clarity, storytelling, and emotional resonance.
+- Use short paragraphs, relevant emojis, strong hooks, and bold important phrases (surrounded by double asterisks like **this**).
+- Keep it authentic, no clickbait.
+
+Here’s the original content:
+${content}
+`;
+
 
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
